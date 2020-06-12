@@ -26,9 +26,12 @@ const App = () => {
   // Try to think through what state you'll need for this app before starting. Then build out
   // the state properties here.
   const [characters, setCharacters] = useState([]);
-  const [page, setPage] = useState('https://rickandmortyapi.com/api/character');
+  const [page, setPage] = useState('https://rickandmortyapi.com/api/character/?page=1');
   const [prevPage, setPrevPage] = useState();
   const [nextPage, setNextPage] = useState();
+  const [maxPage, setMaxPage] = useState();
+  const [currentPage, setCurrentPage] = useState();
+
   // Fetch characters from the API in an effect hook. Remember, anytime you have a 
   // side effect in a component, you want to think about which state and/or props it should
   // sync up with, if any.
@@ -38,6 +41,8 @@ const App = () => {
         setCharacters(response.data.results);
         setPrevPage(response.data.info.prev);
         setNextPage(response.data.info.next);
+        setMaxPage(response.data.info.pages);
+        setCurrentPage(page.substring(page.lastIndexOf('page=') + 5));
         console.log('axios response.data: ', response.data)
       })
       .catch(error => {
@@ -60,7 +65,7 @@ const App = () => {
           </div>
         </Container>
       </section>
-      <Pagination prevPage={prevPage} nextPage={nextPage}></Pagination>
+      <Pagination prevPage={prevPage} nextPage={nextPage} setPage={setPage} maxPage={maxPage} currentPage={currentPage}></Pagination>
 
     </div >
   );
