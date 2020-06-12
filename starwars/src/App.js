@@ -5,11 +5,25 @@ import './App.css';
 const App = () => {
   // Try to think through what state you'll need for this app before starting. Then build out
   // the state properties here.
-
+  const [characters, setCharacters] = useState([]);
+  const [page, setPage] = useState('https://rickandmortyapi.com/api/character');
+  const [prevPage, setPrevPage] = useState();
+  const [nextPage, setNextPage] = useState();
   // Fetch characters from the API in an effect hook. Remember, anytime you have a 
   // side effect in a component, you want to think about which state and/or props it should
   // sync up with, if any.
-
+  useEffect(() => {
+    axios.get(page)
+      .then(response => {
+        setCharacters(response.data.results);
+        setPrevPage(response.data.info.prev);
+        setNextPage(response.data.info.next);
+        console.log('axios response.data: ', response.data)
+      })
+      .catch(error => {
+        console.log('axios error: ', error);
+      })
+  }, [page])
   return (
     <div className="App">
       <h1 className="Header">Characters</h1>
