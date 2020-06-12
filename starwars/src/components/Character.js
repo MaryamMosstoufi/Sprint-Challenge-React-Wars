@@ -20,7 +20,7 @@ function Card(props) {
                             : <div><span className='uk-text-warning uk-text-capitalize'>{props.character.status}</span> - {props.character.species}</div>
                     }
                     <div className='uk-text-truncate'>Origin: {props.character.origin.name}</div>
-                    <div className='uk-text-truncate'>Last Known Location : {props.character.location.name}</div>
+                    <div className='uk-text-truncate'>Location : {props.character.location.name}</div>
                 </div>
 
             </div>
