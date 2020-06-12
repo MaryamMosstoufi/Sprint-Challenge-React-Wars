@@ -27,6 +27,21 @@ const App = () => {
   return (
     <div className="App">
       <h1 className="Header">Characters</h1>
+      {
+        characters.map(character => {
+          return (
+            <div key={character.id}>{character.name}</div>
+          )
+        })
+      }
+      {(prevPage != null)
+        ? <button type='button' onClick=''>Prev</button>
+        : <button type='button' class="disabled">Prev</button>
+      }
+      {(nextPage != null)
+        ? <button type='button' onClick=''>Next</button>
+        : <button type='button' class="disabled">Next</button>
+      }
     </div>
   );
 }
